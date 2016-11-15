@@ -1,18 +1,19 @@
-# MetaWear UWP Starter
-This project provides a template for creating Universal Windows Platform app with the MetaWear C++ API.  The provided code sets up the 
-C++ API to be used in a UWP app and handles all the Bluetooth LE functionality; all users need to do is add in their own UI elements 
-and MetaWear code.
+# MetaWear UWP Stramer
 
-# Usage
-User additions will mostly be added to the [DeviceSetup.xaml.cs](https://github.com/mbientlab/MetaWear-UwpStarter/blob/master/CS%20Template/DeviceSetup.xaml.cs) 
-file and the [DeviceSetup.xaml](https://github.com/mbientlab/MetaWear-UwpStarter/blob/master/CS%20Template/DeviceSetup.xaml) 
+This project is based on the [MetaWear UWP Starter repository](https://github.com/mbientlab/MetaWear-UwpStarter) and the [UWP C# SDK Tutorial](https://mbientlab.com/tutorial/uwp/cs/) both provided by [mbientlab](https://mbientlab.com/).
+
+This project aims to have a Universal Windows Platform app using the [MetaWear C++ API](https://github.com/mbientlab/Metawear-CppAPI) able to stream data (throuh a TCP/IP connection) in real time from the [mbientlab sensors](https://mbientlab.com/sensors/) by using Bluetooth LE.
+
+<!-- # Usage
+User additions will mostly be added to the [DeviceSetup.xaml.cs](https://github.com/mbientlab/MetaWear-UwpStarter/blob/master/CS%20Template/DeviceSetup.xaml.cs)
+file and the [DeviceSetup.xaml](https://github.com/mbientlab/MetaWear-UwpStarter/blob/master/CS%20Template/DeviceSetup.xaml)
 layout file.  We will show how this is done by adding a switch that controls the LED using this app template.
 
 ## LED Switch
 In the ``DeviceSetup.xaml`` layout file, we will add a toggle switch to turn on/off the LED.  
 
 ```xaml
-<ToggleSwitch x:Name="ledSwitch" Header="LED" HorizontalAlignment="Stretch" Margin="10,10,10,0" 
+<ToggleSwitch x:Name="ledSwitch" Header="LED" HorizontalAlignment="Stretch" Margin="10,10,10,0"
               VerticalAlignment="Top" Toggled="ledSwitch_Toggled"/>
 ```
 
@@ -31,4 +32,4 @@ private void ledSwitch_Toggled(object sender, RoutedEventArgs e) {
 }
 ```
 
-After making your code changes, load the app on your phone and use the switch to turn on/off the LED.
+After making your code changes, load the app on your phone and use the switch to turn on/off the LED. -->
