@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # MetaWear UWP Streamer
 
 This project is based on the [MetaWear UWP Starter repository](https://github.com/mbientlab/MetaWear-UwpStarter) and the [UWP C# SDK Tutorial](https://mbientlab.com/tutorial/uwp/cs/) both provided by [mbientlab](https://mbientlab.com/).
@@ -63,3 +64,11 @@ private void ledSwitch_Toggled(object sender, RoutedEventArgs e) {
 ```
 
 After making your code changes, load the app on your phone and use the switch to turn on/off the LED. -->
+=======
+# MetaWear UWP Starter
+This project provides a template for creating Universal Windows Platform app with the MetaWear C++ API.  The example code sets up the 
+C++ API to be used in a UWP app and handles all the Bluetooth LE functionality; all users need to do is add in their own UI elements 
+and MetaWear code.
+
+Both C# and C++/CX examples are provided so pick whichever language you are most comfortable using for building UWP apps.
+>>>>>>> 6bf87143a2b1a169f25e23190b3d6cdfec9ba451

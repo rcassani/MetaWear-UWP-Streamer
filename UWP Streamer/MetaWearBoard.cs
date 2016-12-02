@@ -14,7 +14,7 @@ using MbientLab.MetaWear.Core;
 namespace MbientLab.MetaWear.Template {
     /// <summary>
     /// Wrapper class that Sets up the C++ API to be used in C# following the steps outlined in the C++ documentation:
-    /// https://mbientlab.com/cppdocs/0.5.0/btlecommunication.html
+    /// https://mbientlab.com/cppdocs/latest/btlecommunication.html
     /// </summary>
     public sealed class MetaWearBoard {
         private static Dictionary<ulong, MetaWearBoard> instances= new Dictionary<ulong, MetaWearBoard>();
@@ -88,9 +88,8 @@ namespace MbientLab.MetaWear.Template {
         /// C# wrapper around the MblMwBtleConnection struct 
         /// </summary>
         private BtleConnection btleConn;
-        /// <summary>
-        /// Delegate wrapper the <see cref="initialized"/> callback function
-        /// </summary>
+
+        private TaskCompletionSource<int> initTaskSource;
         private Fn_IntPtr_Int initDelegate;
 
         private MetaWearBoard(BluetoothLEDevice btleDevice) {
@@ -107,16 +106,22 @@ namespace MbientLab.MetaWear.Template {
         /// <summary>
         /// Initialize the API
         /// </summary>
-        /// <param name="initDelegate">C# Delegate wrapping the callback for <see cref="mbl_mw_metawearboard_initialize(IntPtr, FnVoid)"/></param>
-        public async void Initialize(Fn_IntPtr_Int initDelegate) {
+        /// <returns>Status value from calling <see cref="mbl_mw_metawearboard_initialize(IntPtr, Fn_IntPtr_Int)"/></returns>
+        public async Task<int> Initialize() {
             if (notifyChar == null) {
                 notifyChar = btleDevice.GetGattService(GattCharGuid.METAWEAR_NOTIFY_CHAR.serviceGuid).GetCharacteristics(GattCharGuid.METAWEAR_NOTIFY_CHAR.guid).FirstOrDefault();
                 notifyChar.ValueChanged += notifyHandler;
                 await notifyChar.WriteClientCharacteristicConfigurationDescriptorAsync(GattClientCharacteristicConfigurationDescriptorValue.Notify);
             }
 
-            this.initDelegate = initDelegate;
-            mbl_mw_metawearboard_initialize(cppBoard, this.initDelegate);
+            initTaskSource = new TaskCompletionSource<int>();
+
+            initDelegate = new Fn_IntPtr_Int((caller, status) => {
+                initTaskSource.SetResult(status);
+            });
+            mbl_mw_metawearboard_initialize(cppBoard, initDelegate);
+
+            return await initTaskSource.Task;
         }
 
         /// <summary>
